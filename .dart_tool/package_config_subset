@@ -30,6 +30,10 @@ flutter_lints
 2.17
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1/
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1/lib/
+flutter_riverpod
+2.17
+file:///Users/yuyataki/.pub-cache/hosted/pub.dev/flutter_riverpod-2.3.4/
+file:///Users/yuyataki/.pub-cache/hosted/pub.dev/flutter_riverpod-2.3.4/lib/
 js
 2.16
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/js-0.6.5/
@@ -54,6 +58,10 @@ path
 2.12
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/path-1.8.2/
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/path-1.8.2/lib/
+riverpod
+2.17
+file:///Users/yuyataki/.pub-cache/hosted/pub.dev/riverpod-2.3.4/
+file:///Users/yuyataki/.pub-cache/hosted/pub.dev/riverpod-2.3.4/lib/
 source_span
 2.14
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/source_span-1.9.1/
@@ -62,6 +70,10 @@ stack_trace
 2.18
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/stack_trace-1.11.0/
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/stack_trace-1.11.0/lib/
+state_notifier
+2.12
+file:///Users/yuyataki/.pub-cache/hosted/pub.dev/state_notifier-0.7.2+1/
+file:///Users/yuyataki/.pub-cache/hosted/pub.dev/state_notifier-0.7.2+1/lib/
 stream_channel
 2.14
 file:///Users/yuyataki/.pub-cache/hosted/pub.dev/stream_channel-2.1.1/

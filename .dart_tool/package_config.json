@@ -56,6 +56,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_riverpod",
+      "rootUri": "file:///Users/yuyataki/.pub-cache/hosted/pub.dev/flutter_riverpod-2.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/yuyataki/fvm/versions/3.7.11/packages/flutter_test",
       "packageUri": "lib/",
@@ -98,6 +104,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "riverpod",
+      "rootUri": "file:///Users/yuyataki/.pub-cache/hosted/pub.dev/riverpod-2.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/yuyataki/fvm/versions/3.7.11/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -114,6 +126,12 @@
       "rootUri": "file:///Users/yuyataki/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "state_notifier",
+      "rootUri": "file:///Users/yuyataki/.pub-cache/hosted/pub.dev/state_notifier-0.7.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
@@ -152,7 +170,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-04-13T12:08:19.601696Z",
+  "generated": "2023-04-13T12:17:13.147070Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
