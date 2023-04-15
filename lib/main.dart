@@ -22,45 +22,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key});
 
+  @override
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     print("MyHomePave rebuild");
     return Scaffold(
       appBar: AppBar(
-        title: Consumer(
-          builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-              Text(ref.watch(titleProvider)),
+        title: Text(
+          ref.watch(titleProvider),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-                  Text(ref.watch(messageProvider)),
-            ),
-            Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-                  Text(
-                ref.watch(countProvider).toString(),
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
+            Text(ref.watch(messageProvider)),
+            Text(
+              ref.watch(countProvider).toString(),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
-      floatingActionButton: Consumer(
-        builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-            FloatingActionButton(
-          onPressed: () =>
-              ref.read(countProvider.notifier).update((state) => state + 1),
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            ref.read(countProvider.notifier).update((state) => state + 1),
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+        // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }
