@@ -57,7 +57,7 @@ class MyHomePage extends StatelessWidget {
         builder: (BuildContext context, WidgetRef ref, Widget? child) =>
             FloatingActionButton(
           onPressed: () =>
-              ref.watch(countProvider.notifier).update((state) => state + 1),
+              ref.read(countProvider.notifier).update((state) => state + 1),
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ), // This trailing comma makes auto-formatting nicer for build methods.
