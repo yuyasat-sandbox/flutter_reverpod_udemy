@@ -1,5 +1,4 @@
 import 'package:flutter_reverpod_udemy/data/count_data.dart';
-import 'package:flutter_reverpod_udemy/provider.dart';
 
 class Logic {
   CountData _countData = const CountData(

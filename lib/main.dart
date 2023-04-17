@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_reverpod_udemy/data/count_data.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
+import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -32,6 +33,14 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
+  ViewModel _viewModel = ViewModel();
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel.setRef(ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     print("MyHomePave rebuild");
@@ -47,33 +56,19 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           children: <Widget>[
             Text(ref.watch(messageProvider)),
             Text(
-              ref.watch(countDataProvider).count.toString(),
+              _viewModel.count,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
-                  onPressed: () {
-                    CountData countData =
-                        ref.read(countDataProvider.notifier).state;
-                    ref.read(countDataProvider.notifier).update((state) =>
-                        countData.copyWith(
-                            count: state.count + 1,
-                            countUp: state.countUp + 1));
-                  },
+                  onPressed: _viewModel.onIncrease,
                   child: const Icon(CupertinoIcons.plus),
                   // This trailing comma makes auto-formatting nicer for build methods.
                 ),
                 FloatingActionButton(
-                  onPressed: () {
-                    CountData countData =
-                        ref.read(countDataProvider.notifier).state;
-                    ref.read(countDataProvider.notifier).update((state) =>
-                        countData.copyWith(
-                            count: state.count - 1,
-                            countDown: state.countDown - 1));
-                  },
+                  onPressed: _viewModel.onDecrease,
                   child: const Icon(CupertinoIcons.minus),
                   // This trailing comma makes auto-formatting nicer for build methods.
                 ),
@@ -82,22 +77,15 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(ref
-                    .watch(countDataProvider.select((value) => value.countUp))
-                    .toString()),
-                Text(ref
-                    .watch(countDataProvider.select((value) => value.countDown))
-                    .toString()),
+                Text(_viewModel.countUp),
+                Text(_viewModel.countDown),
               ],
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ref.read(countDataProvider.notifier).update(
-              (state) => const CountData(count: 0, countUp: 0, countDown: 0));
-        },
+        onPressed: _viewModel.onReset,
         tooltip: 'Increment',
         child: const Icon(Icons.refresh),
         // This trailing comma makes auto-formatting nicer for build methods.
