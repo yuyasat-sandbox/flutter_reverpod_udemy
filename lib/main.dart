@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_reverpod_udemy/data/count_data.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,24 +19,27 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(ViewModel()),
     );
   }
 }
 
+// ignore: must_be_immutable
 class MyHomePage extends ConsumerStatefulWidget {
-  const MyHomePage({super.key});
+  final ViewModel viewModel;
+  const MyHomePage(this.viewModel, {super.key});
 
   @override
   ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-  ViewModel _viewModel = ViewModel();
+  late ViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
+    _viewModel = widget.viewModel;
     _viewModel.setRef(ref);
   }
 
