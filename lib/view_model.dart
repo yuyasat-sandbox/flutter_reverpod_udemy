@@ -1,15 +1,13 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_reverpod_udemy/data/count_data.dart';
-import 'package:flutter_reverpod_udemy/logic.dart';
+import 'package:flutter_reverpod_udemy/logic/logic.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ViewModel {
-  Logic _logic = Logic();
+  final Logic _logic = Logic();
   late WidgetRef _ref;
 
   void setRef(WidgetRef ref) {
-    this._ref = ref;
+    _ref = ref;
   }
 
   get count => _ref.watch(countDataProvider).count.toString();

@@ -1,4 +1,4 @@
-import 'package:flutter_reverpod_udemy/logic.dart';
+import 'package:flutter_reverpod_udemy/logic/logic.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
