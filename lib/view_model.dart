@@ -1,3 +1,4 @@
+import 'package:flutter_reverpod_udemy/data/count_data.dart';
 import 'package:flutter_reverpod_udemy/logic/logic.dart';
 import 'package:flutter_reverpod_udemy/logic/sound_logic.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
@@ -24,19 +25,24 @@ class ViewModel {
 
   void onIncrease() {
     _logic.increase();
-    _ref.read(countDataProvider.notifier).update((state) => _logic.countData);
-    _soundLogic.playUp();
+    update();
   }
 
   void onDecrease() {
     _logic.decrease();
-    _ref.read(countDataProvider.notifier).update((state) => _logic.countData);
-    _soundLogic.playDown();
+    update();
   }
 
   void onReset() {
     _logic.reset();
+    update();
+  }
+
+  void update() {
+    CountData oldData = _ref.watch(countDataProvider);
     _ref.read(countDataProvider.notifier).update((state) => _logic.countData);
-    _soundLogic.playReset();
+    CountData newData = _ref.watch(countDataProvider);
+
+    _soundLogic.valueChanged(oldData, newData);
   }
 }
