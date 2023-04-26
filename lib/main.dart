@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,14 +34,15 @@ class MyHomePage extends ConsumerStatefulWidget {
   ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends ConsumerState<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage>
+    with TickerProviderStateMixin {
   late ViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
     _viewModel = widget.viewModel;
-    _viewModel.setRef(ref);
+    _viewModel.setRef(ref, this);
   }
 
   @override
@@ -66,12 +68,18 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               children: [
                 FloatingActionButton(
                   onPressed: _viewModel.onIncrease,
-                  child: const Icon(CupertinoIcons.plus),
+                  child: ScaleTransition(
+                    scale: _viewModel.animationPlus,
+                    child: const Icon(CupertinoIcons.plus),
+                  ),
                   // This trailing comma makes auto-formatting nicer for build methods.
                 ),
                 FloatingActionButton(
                   onPressed: _viewModel.onDecrease,
-                  child: const Icon(CupertinoIcons.minus),
+                  child: ScaleTransition(
+                    scale: _viewModel.animationMinus,
+                    child: const Icon(CupertinoIcons.minus),
+                  ),
                   // This trailing comma makes auto-formatting nicer for build methods.
                 ),
               ],
@@ -89,7 +97,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _viewModel.onReset,
         tooltip: 'Increment',
-        child: const Icon(Icons.refresh),
+        child: ScaleTransition(
+          scale: _viewModel.animationReset,
+          child: const Icon(Icons.refresh),
+        ),
         // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );

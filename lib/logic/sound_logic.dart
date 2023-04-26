@@ -1,7 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_reverpod_udemy/data/count_data.dart';
+import 'package:flutter_reverpod_udemy/logic/count_data_changed_notifier.dart';
 
-class SoundLogic {
+class SoundLogic with CountDataChangedNotifier {
   static const String _soundDataUp = 'sounds/Onoma-Flash07-1.mp3';
   static const String _soundDataDown = 'sounds/Onoma-Flash08-1.mp3';
   static const String _soundDataReset = 'sounds/Onoma-Flash09-1.mp3';
@@ -13,6 +14,7 @@ class SoundLogic {
     _cache.loadAll([_soundDataUp, _soundDataDown, _soundDataReset]);
   }
 
+  @override
   void valueChanged(CountData oldData, CountData newData) {
     if (newData.countUp == 0 && newData.countDown == 0 && newData.count == 0) {
       playReset();
