@@ -52,9 +52,12 @@ class ViewModel {
       .watch(countDataProvider.select((value) => value.countDown))
       .toString();
 
-  get animationPlus => _buttonAnimationLogicPlus.animationScale;
-  get animationMinus => _buttonAnimationLogicMinus.animationScale;
-  get animationReset => _buttonAnimationLogicReset.animationScale;
+  get animationPlusCombination =>
+      _buttonAnimationLogicPlus.animationConbination;
+  get animationMinusCombination =>
+      _buttonAnimationLogicMinus.animationConbination;
+  get animationResetCombination =>
+      _buttonAnimationLogicReset.animationConbination;
 
   void onIncrease() {
     _logic.increase();

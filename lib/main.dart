@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_reverpod_udemy/logic/button_animation_logic.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,19 +69,16 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
               children: [
                 FloatingActionButton(
                   onPressed: _viewModel.onIncrease,
-                  child: ScaleTransition(
-                    scale: _viewModel.animationPlus,
-                    child: const Icon(CupertinoIcons.plus),
-                  ),
-                  // This trailing comma makes auto-formatting nicer for build methods.
+                  child: ButtonAnimation(
+                      animationConbination: _viewModel.animationPlusCombination,
+                      child: const Icon(CupertinoIcons.plus)),
                 ),
                 FloatingActionButton(
                   onPressed: _viewModel.onDecrease,
-                  child: ScaleTransition(
-                    scale: _viewModel.animationMinus,
-                    child: const Icon(CupertinoIcons.minus),
-                  ),
-                  // This trailing comma makes auto-formatting nicer for build methods.
+                  child: ButtonAnimation(
+                      animationConbination:
+                          _viewModel.animationMinusCombination,
+                      child: const Icon(CupertinoIcons.minus)),
                 ),
               ],
             ),
@@ -97,11 +95,32 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
       floatingActionButton: FloatingActionButton(
         onPressed: _viewModel.onReset,
         tooltip: 'Increment',
-        child: ScaleTransition(
-          scale: _viewModel.animationReset,
-          child: const Icon(Icons.refresh),
-        ),
-        // This trailing comma makes auto-formatting nicer for build methods.
+        child: ButtonAnimation(
+            animationConbination: _viewModel.animationResetCombination,
+            child: const Icon(Icons.refresh)),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class ButtonAnimation extends StatelessWidget {
+  final AnimationConbination animationConbination;
+  final Widget child;
+
+  const ButtonAnimation({
+    Key? key,
+    required this.animationConbination,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: animationConbination.animationScale,
+      child: RotationTransition(
+        turns: animationConbination.animationRotation,
+        child: child,
       ),
     );
   }
