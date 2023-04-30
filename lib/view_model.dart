@@ -3,6 +3,7 @@ import 'package:flutter_reverpod_udemy/data/count_data.dart';
 import 'package:flutter_reverpod_udemy/logic/button_animation_logic.dart';
 import 'package:flutter_reverpod_udemy/logic/count_data_changed_notifier.dart';
 import 'package:flutter_reverpod_udemy/logic/logic.dart';
+import 'package:flutter_reverpod_udemy/logic/shared_preference_logic.dart';
 import 'package:flutter_reverpod_udemy/logic/sound_logic.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,7 +41,13 @@ class ViewModel {
       _buttonAnimationLogicPlus,
       _buttonAnimationLogicMinus,
       _buttonAnimationLogicReset,
+      SharedPreferencesLogic(),
     ];
+
+    SharedPreferencesLogic.read().then((value) {
+      _logic.init(value);
+      update();
+    });
   }
 
   get count => _ref.watch(countDataProvider).count.toString();
