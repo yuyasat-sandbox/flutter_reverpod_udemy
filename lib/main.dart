@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_reverpod_udemy/logic/button_animation_logic.dart';
+import 'package:flutter_reverpod_udemy/postal_code_view.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,12 +68,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
+                  heroTag: "increase",
                   onPressed: _viewModel.onIncrease,
                   child: ButtonAnimation(
                       animationConbination: _viewModel.animationPlusCombination,
                       child: const Icon(CupertinoIcons.plus)),
                 ),
                 FloatingActionButton(
+                  heroTag: "decrease",
                   onPressed: _viewModel.onDecrease,
                   child: ButtonAnimation(
                       animationConbination:
@@ -89,15 +91,29 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
                 Text(_viewModel.countDown),
               ],
             ),
+            ElevatedButton(
+              onPressed: () => {
+                print("fugafuga"),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PostalCodeView(),
+                  ),
+                )
+              },
+              child: const Text('PostalCodeページに行く'),
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "reset",
         onPressed: _viewModel.onReset,
         tooltip: 'Increment',
         child: ButtonAnimation(
-            animationConbination: _viewModel.animationResetCombination,
-            child: const Icon(Icons.refresh)),
+          animationConbination: _viewModel.animationResetCombination,
+          child: const Icon(Icons.refresh),
+        ),
       ),
     );
   }
