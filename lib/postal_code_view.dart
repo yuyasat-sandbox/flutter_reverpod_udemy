@@ -7,7 +7,9 @@ class PostalCodeView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final postalCode = ref.watch(apiProvider).asData; //.value;
+    final postalCode = ref.watch(apiProvider); // asData; //.value;
+    final familyPostalCode =
+        ref.watch(apiFamilyProvider(ref.watch(postalCodeProvider)));
     return Scaffold(
       appBar: AppBar(
         title: const Text('PostalCode'),
@@ -22,8 +24,42 @@ class PostalCodeView extends ConsumerWidget {
               TextField(
                 onChanged: (text) => onPostalCodeChanged(text, ref),
               ),
+              const Text('without family'),
               Expanded(
-                child: ref.watch(apiProvider).when(
+                child: postalCode.when(
+                  data: (data) {
+                    return ListView.separated(
+                      itemCount: data.data.length,
+                      itemBuilder: (context, index) => ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(data.data[0].en.prefecture),
+                            Text(data.data[0].en.address1),
+                            Text(data.data[0].en.address2),
+                            Text(data.data[0].en.address3),
+                            Text(data.data[0].en.address4),
+                          ],
+                        ),
+                      ),
+                      separatorBuilder: (context, index) =>
+                          const Divider(color: Colors.black),
+                    );
+                  },
+                  loading: () {
+                    return const AspectRatio(
+                      aspectRatio: 1,
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  error: (error, stackTrace) {
+                    return Text(error.toString());
+                  },
+                ),
+              ),
+              const Text('with family'),
+              Expanded(
+                child: familyPostalCode.when(
                   data: (data) {
                     return ListView.separated(
                       itemCount: data.data.length,
