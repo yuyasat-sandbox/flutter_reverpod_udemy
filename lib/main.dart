@@ -93,7 +93,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
             ),
             ElevatedButton(
               onPressed: () => {
-                print("fugafuga"),
                 Navigator.push(
                   context,
                   MaterialPageRoute(
