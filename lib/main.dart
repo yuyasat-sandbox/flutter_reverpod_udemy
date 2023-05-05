@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_reverpod_udemy/logic/button_animation_logic.dart';
-import 'package:flutter_reverpod_udemy/postal_code_view.dart';
+import 'package:flutter_reverpod_udemy/postal_code_page.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -96,7 +96,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const PostalCodeView(),
+                    builder: (context) => const PostalCodePage(),
                   ),
                 )
               },
