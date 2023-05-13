@@ -1,12 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_reverpod_udemy/logic/button_animation_logic.dart';
 import 'package:flutter_reverpod_udemy/postal_code_page.dart';
 import 'package:flutter_reverpod_udemy/provider.dart';
 import 'package:flutter_reverpod_udemy/view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+import 'button_animation.dart';
+import 'count_data_fs_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -102,6 +107,17 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
               },
               child: const Text('PostalCodeページに行く'),
             ),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CountDataFsPage(ViewModel()),
+                  ),
+                )
+              },
+              child: const Text('CoutUpFirebaseページに行く'),
+            ),
           ],
         ),
       ),
@@ -113,29 +129,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
           animationConbination: _viewModel.animationResetCombination,
           child: const Icon(Icons.refresh),
         ),
-      ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class ButtonAnimation extends StatelessWidget {
-  final AnimationConbination animationConbination;
-  final Widget child;
-
-  const ButtonAnimation({
-    Key? key,
-    required this.animationConbination,
-    required this.child,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: animationConbination.animationScale,
-      child: RotationTransition(
-        turns: animationConbination.animationRotation,
-        child: child,
       ),
     );
   }
