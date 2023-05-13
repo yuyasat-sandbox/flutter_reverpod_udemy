@@ -1,44 +1,44 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_reverpod_udemy/provider.dart';
-import 'package:flutter_reverpod_udemy/view_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_reverpod_udemy/data/count_data_fs.dart';
+import 'package:flutter_reverpod_udemy/repository/count_data_dao.dart';
 
-import 'button_animation.dart';
+class CountDataFsPage extends StatefulWidget {
+  const CountDataFsPage(this.title, {super.key});
 
-class CountDataFsPage extends ConsumerStatefulWidget {
-  final ViewModel viewModel;
-  const CountDataFsPage(this.viewModel, {super.key});
+  final String title;
 
   @override
-  ConsumerState<CountDataFsPage> createState() => _CountDataFsPageState();
+  State<CountDataFsPage> createState() => _CountDataFsPageState();
 }
 
-class _CountDataFsPageState extends ConsumerState<CountDataFsPage>
-    with TickerProviderStateMixin {
-  late ViewModel _viewModel;
+class _CountDataFsPageState extends State<CountDataFsPage> {
+  int _counter = 0;
+  final CountDataDao _countDataDao = CountDataDao();
 
-  @override
-  void initState() {
-    super.initState();
-    _viewModel = widget.viewModel;
-    _viewModel.setRef(ref, this);
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+
+    CountDataFs countData = CountDataFs(
+      dateTime: DateTime.now(),
+      count: _counter,
+    );
+    _countDataDao.saveCountData(countData);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          ref.watch(titleProvider),
-        ),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(ref.watch(messageProvider)),
+            const Text('You have pushed the button this many times:'),
             Text(
-              _viewModel.count,
+              _counter.toString(),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -46,12 +46,9 @@ class _CountDataFsPageState extends ConsumerState<CountDataFsPage>
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: "reset",
-        onPressed: _viewModel.onReset,
+        onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: ButtonAnimation(
-          animationConbination: _viewModel.animationResetCombination,
-          child: const Icon(Icons.refresh),
-        ),
+        child: const Icon(CupertinoIcons.plus),
       ),
     );
   }

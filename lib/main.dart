@@ -112,7 +112,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CountDataFsPage(ViewModel()),
+                    builder: (context) => const CountDataFsPage("Flutter Demo"),
                   ),
                 )
               },
