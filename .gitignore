@@ -136,3 +136,6 @@ app.*.symbols
 
 
 test/failures/
+
+google-services.json
+GoogleService-Info.plist
